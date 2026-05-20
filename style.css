@@ -23,6 +23,17 @@ body {
   font-size: 1rem;
 }
 
+.score-board {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.score-board h2 {
+  color: #ffffc7;
+}
+
 .container {
   min-height: 70vh;
   display: flex;
@@ -52,6 +63,11 @@ body {
   font-size: 10vmin;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
   cursor: pointer;
+}
+
+#turn-indicator {
+  color: #ffffc7;
+  margin-bottom: 1rem;
 }
 
 #start-btn {

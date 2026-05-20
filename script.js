@@ -3,16 +3,29 @@ let startBtn = document.querySelector("#start-btn");
 let gameContainer = document.querySelector("#game-container");
 let restartBtn = document.querySelector("#restart-btn");
 let resetBtn = document.querySelector("#reset-btn");
+let turnIndicator = document.querySelector("#turn-indicator");
 let newGameBtn = document.querySelector("#new-btn");
 let msgContainer = document.querySelector(".msg-container");
 let msg = document.querySelector("#msg");
 let playerXName = "";
 let playerOName = "";
+let xScore = 0;
+let oScore = 0;
+let currentStarter = "O";
 
 let playerXInput = document.querySelector("#playerX");
 let playerOInput = document.querySelector("#playerO");
+let xScoreDisplay = document.querySelector("#x-score");
+let oScoreDisplay = document.querySelector("#o-score");
 
-let turnO = true;
+if (currentStarter === "O") {
+  turnO = true;
+  currentStarter = "X";
+} 
+else {
+  turnO = false;
+  currentStarter = "O";
+}
 let count = 0;
 const winPatterns = [
   [0, 1, 2],
@@ -32,6 +45,9 @@ startBtn.addEventListener("click", () => {
     alert("Please Enter Both Player Names");
     return;
   }
+  xScoreDisplay.innerText = `${playerXName} (X) : ${xScore}`;
+  oScoreDisplay.innerText = `${playerOName} (O) : ${oScore}`;
+  updateTurnIndicator();
   gameContainer.classList.remove("hide");
   document.querySelector(".player-inputs").classList.add("hide");
   startBtn.classList.add("hide");
@@ -39,6 +55,10 @@ startBtn.addEventListener("click", () => {
 
 restartBtn.addEventListener("click", () => {
   resetGame();
+  xScore = 0;
+  oScore = 0;
+  xScoreDisplay.innerText = "Player X : 0";
+  oScoreDisplay.innerText = "Player O : 0";
   msgContainer.classList.add("hide");
   gameContainer.classList.add("hide");
   document.querySelector(".player-inputs").classList.remove("hide");
@@ -48,10 +68,26 @@ restartBtn.addEventListener("click", () => {
 });
 
 const resetGame = () => {
-  turnO = true;
+  if (currentStarter === "O") {
+    turnO = true;
+    currentStarter = "X";
+  }
+  else {
+    turnO = false;
+    currentStarter = "O";
+  }
   count = 0;
   enableBoxes();
+  updateTurnIndicator();
   msgContainer.classList.add("hide");
+};
+
+const updateTurnIndicator = () => {
+  if (turnO) {
+    turnIndicator.innerText = `Current Turn: ${playerOName} (O)`;
+  } else {
+    turnIndicator.innerText = `Current Turn: ${playerXName} (X)`;
+  }
 };
 
 boxes.forEach((box) => {
@@ -65,9 +101,11 @@ if (playerXName === "" || playerOName === "") {
     if (turnO) {
       box.innerText = "O";
       turnO = false;
+      updateTurnIndicator();
     } else {
       box.innerText = "X";
       turnO = true;
+      updateTurnIndicator();
     }
     box.disabled = true;
     count++;
@@ -79,8 +117,9 @@ if (playerXName === "" || playerOName === "") {
 });
 
 const gameDraw = () => {
-  msg.innerText = `Game was a Draw.`;
+  msg.innerText = `It's a Draw.`;
   msgContainer.classList.remove("hide");
+  turnIndicator.innerText = "";
   disableBoxes();
 };
 
@@ -101,11 +140,16 @@ const showWinner = (winner) => {
   let winnerName = "";
   if (winner === "X") {
     winnerName = playerXName;
+    xScore++;
+    xScoreDisplay.innerText = `${playerXName} (X) : ${xScore}`;
   } else {
     winnerName = playerOName;
+    oScore++;
+    oScoreDisplay.innerText = `${playerOName} (O) : ${oScore}`;
   }
   msg.innerText = `Congratulations ${winnerName} (${winner}) Wins!`;
   msgContainer.classList.remove("hide");
+  turnIndicator.innerText = "";
   disableBoxes();
 };
 
