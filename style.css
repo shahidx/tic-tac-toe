@@ -67,7 +67,10 @@ body {
 
 #turn-indicator {
   color: #ffffc7;
+  font-size: 1.3rem;
   margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  text-align: center;
 }
 
 #start-btn {
