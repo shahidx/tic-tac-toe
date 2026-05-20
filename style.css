@@ -8,6 +8,21 @@ body {
   text-align: center;
 }
 
+.player-inputs {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.player-inputs input {
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1rem;
+}
+
 .container {
   min-height: 70vh;
   display: flex;
@@ -36,6 +51,28 @@ body {
   color: #b0413e;
   font-size: 10vmin;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+#start-btn {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 1rem;
+  background-color: #191913;
+  color: white;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+#restart-btn {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  background-color: #191913;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  margin-top: 1rem;
   cursor: pointer;
 }
 
